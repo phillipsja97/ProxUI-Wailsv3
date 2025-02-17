@@ -1,4 +1,4 @@
-module github.com/phillipsja97/ProxUI-Wailsv3
+module changeme
 
 go 1.22.4
 

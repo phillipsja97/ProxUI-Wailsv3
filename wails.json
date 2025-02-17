@@ -1,0 +1,13 @@
+{
+    "name": "ProxUI-v3",
+    "outputfilename": "ProxUI-v3",
+    "frontend:install": "npm install",
+    "frontend:build": "npm run build",
+    "frontend:dev:watcher": "npm run dev",
+    "frontend:dev:serverUrl": "auto",
+    "author": {
+      "name": "Jamie Phillips",
+      "email": "phillipsja97@gmail.com"
+    }
+  }
+  
