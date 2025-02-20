@@ -5,8 +5,10 @@ import (
 	_ "embed"
 	"log"
 	"time"
+	"fmt"
 
 	"github.com/wailsapp/wails/v3/pkg/application"
+	"github.com/phillipsja97/ProxUI-Wailsv3"
 )
 
 // Wails uses Go's `embed` package to embed the frontend files into the binary.
@@ -32,6 +34,7 @@ func main() {
 		Description: "Test Application for Tailscale and Traefik/Caddy",
 		Services: []application.Service{
 			application.NewService(&GreetService{}),
+			application.NewService(NewTailscaleHTTPClient()),
 		},
 		Assets: application.AssetOptions{
 			Handler: application.AssetFileServerFS(assets),
@@ -66,6 +69,8 @@ func main() {
 			time.Sleep(time.Second)
 		}
 	}()
+
+	fmt.println(httpclient.GetDevices())
 
 	// Run the application. This blocks until the application has been exited.
 	err := app.Run()
