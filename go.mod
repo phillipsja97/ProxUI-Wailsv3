@@ -4,7 +4,10 @@ go 1.23.1
 
 toolchain go1.24.0
 
-require github.com/wailsapp/wails/v3 v3.0.0-alpha.9
+require (
+	github.com/wailsapp/wails/v3 v3.0.0-alpha.9
+	tailscale.com/client/tailscale/v2 v2.0.0-20250214214218-df6d4a0f0c18
+)
 
 require (
 	dario.cat/mergo v1.0.1 // indirect
