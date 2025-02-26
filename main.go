@@ -5,13 +5,7 @@ import (
 	_ "embed"
 	"log"
 	"time"
-	"fmt"
-	// "context"
-	// "os"
-	// "fmt"7895bc (pushing up to trasnfer to desktop)
-
 	"github.com/wailsapp/wails/v3/pkg/application"
-	"github.com/phillipsja97/ProxUI-Wailsv3"
 )
 
 // Wails uses Go's `embed` package to embed the frontend files into the binary.
@@ -76,8 +70,6 @@ func main() {
 			time.Sleep(time.Second)
 		}
 	}()
-
-	fmt.println(httpclient.GetDevices())
 
 	// Run the application. This blocks until the application has been exited.
 

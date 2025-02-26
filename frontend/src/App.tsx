@@ -4,18 +4,6 @@ import CreateClient from './data/tailscaleHttp/createClient.tsx'
 import { Sidebar } from "flowbite-react";
 import { HiArrowSmRight, HiCloud, HiDatabase, HiPencil, HiWifi } from "react-icons/hi";
 
-// async function CreateClient() {
-//   try {
-//     const client = await CreateNewClient();
-
-//     const devices = client.Devices();
-//     console.log(devices);
-//     return devices;
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
-
 function App() {
   const [httpClient, setHttpClient] = useState({});
 
@@ -23,7 +11,11 @@ function App() {
     const client = CreateClient();
     setHttpClient(client);
     console.log(httpClient);
-  },[])
+  },[httpClient])
+
+  const test = () => {
+    console.log("Clicked!")
+  }
 
   return (
     <div className="flex flex-row">
@@ -32,7 +24,7 @@ function App() {
         >
         <Sidebar.Items>
           <Sidebar.ItemGroup>
-            <Sidebar.Item href="/#/network" icon={HiWifi}>
+            <Sidebar.Item onClick={test} icon={HiWifi}>
               Network
             </Sidebar.Item>
             <Sidebar.Item href="/#/proxy" icon={HiCloud}>

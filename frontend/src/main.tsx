@@ -17,6 +17,8 @@ import { Flowbite } from "flowbite-react";
 //   },
 // }
 
+// const =
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <Flowbite /*theme={{ theme: customTheme }}*/>
     <HashRouter>
