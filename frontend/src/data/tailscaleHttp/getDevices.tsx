@@ -1,6 +1,6 @@
 import { GetDevices } from '../../../bindings/github.com/phillipsja97/ProxUI-Wailsv3/tailscaleservice.ts';
 
-const GetTailnetDevices = () => new Promise((resolve, reject) => {
+const GetDeviceList = () => new Promise((resolve, reject) => {
     GetDevices()
         .then((result) => {
             resolve(result);
@@ -10,4 +10,4 @@ const GetTailnetDevices = () => new Promise((resolve, reject) => {
         })
 });
 
-export default GetTailnetDevices;
+export default GetDeviceList;
