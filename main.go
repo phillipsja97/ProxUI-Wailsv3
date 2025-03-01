@@ -32,7 +32,6 @@ func main() {
 		Name:        "ProxUI-v3",
 		Description: "Test Application for Tailscale and Traefik/Caddy",
 		Services: []application.Service{
-			application.NewService(&GreetService{}),
 			application.NewService(&TailscaleService{}),
 		},
 		Assets: application.AssetOptions{

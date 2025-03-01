@@ -4,6 +4,9 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"log"
+	// "encoding/json"
+	"github.com/joho/godotenv"
 	"tailscale.com/client/tailscale/v2"
 )
 
@@ -11,26 +14,43 @@ import (
 type TailscaleService struct {}
 
 func (s *TailscaleService) GetDevices() (devices []tailscale.Device) {
-	tailnet, tailErr := os.LookupEnv("TAILNET")
-	if tailErr != true {
-		fmt.Printf("Tailnet ENV not found")
-	}
-
-	tskey, keyErr := os.LookupEnv("TS_KEY")
-	if keyErr != true {
-		fmt.Printf("Tailnet ENV not found")
+	loadErr := godotenv.Load()
+	if loadErr != nil {
+		log.Fatalf("Error loading .env file %s", loadErr)
 	}
 
 	client := &tailscale.Client{
-		Tailnet: tailnet,
-		APIKey: tskey,
+		Tailnet: os.Getenv("TAILNET"),
+		APIKey: os.Getenv("TAILSCALE_APIKEY"),
 	}
 
-	devices, err := client.Devices().List(context.Background())
-
+	devices, err := client.Devices().ListWithAllFields(context.Background())
 	if err != nil {
 		fmt.Printf("Failed to get devices %s", err)
 	}
 
 	return devices
+}
+
+func (s *TailscaleService) GetUsers() (users []tailscale.User) {
+	loadErr := godotenv.Load()
+	if loadErr != nil {
+		log.Fatalf("Error loading .env file %s", loadErr)
+	}
+
+	client := &tailscale.Client{
+		Tailnet: os.Getenv("TAILNET"),
+		APIKey: os.Getenv("TAILSCALE_APIKEY"),
+	}
+
+	// var userType *tailscale.UserType
+	// var userRole *tailscale.UserRole
+
+
+	users, err := client.Users().List(context.Background(), nil, nil)
+	if err != nil {
+		fmt.Printf("Failed to get users %s", err)
+	}
+
+	return users
 }

@@ -5,6 +5,7 @@ go 1.23.1
 toolchain go1.24.0
 
 require (
+	github.com/joho/godotenv v1.5.1
 	github.com/wailsapp/wails/v3 v3.0.0-alpha.9
 	tailscale.com/client/tailscale/v2 v2.0.0-20250222012233-b9e1df8625a0
 )
