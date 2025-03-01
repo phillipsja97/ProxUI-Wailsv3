@@ -314,13 +314,13 @@ export class User {
             this["created"] = null;
         }
         if (!("type" in $$source)) {
-            this["type"] = ("" as UserType);
+            this["type"] = UserType.$zero;
         }
         if (!("role" in $$source)) {
-            this["role"] = ("" as UserRole);
+            this["role"] = UserRole.$zero;
         }
         if (!("status" in $$source)) {
-            this["status"] = ("" as UserStatus);
+            this["status"] = UserStatus.$zero;
         }
         if (!("deviceCount" in $$source)) {
             this["deviceCount"] = 0;
