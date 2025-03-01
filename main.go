@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 	"github.com/wailsapp/wails/v3/pkg/application"
-	"github.com/phillipsja97/ProxUI-Wailsv3/pkg/pocketbase"
+	"github.com/phillipsja97/ProxUI-wailsv3/pkg/pocketbase"
 )
 
 // Wails uses Go's `embed` package to embed the frontend files into the binary.
@@ -34,7 +34,7 @@ func main() {
 		Description: "Test Application for Tailscale and Traefik/Caddy",
 		Services: []application.Service{
 			application.NewService(&TailscaleService{}),
-			application.NewService(&Pocketbase{}),
+			application.NewService(&PocketBase{}),
 		},
 		Assets: application.AssetOptions{
 			Handler: application.AssetFileServerFS(assets),

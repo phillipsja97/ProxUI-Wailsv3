@@ -12,7 +12,7 @@ import (
 
 type Pocketbase struct {}
 
-func (p * Pocketbase) main() {
+func (p * Pocketbase) PocketBase() {
     app := pocketbase.New()
 
     app.OnServe().BindFunc(func(se *core.ServeEvent) error {
