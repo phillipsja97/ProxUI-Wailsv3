@@ -1,4 +1,4 @@
-package pocketbase
+package main
 
 import (
     "log"
@@ -12,7 +12,11 @@ import (
 
 type Pocketbase struct {}
 
-func (p * Pocketbase) main() {
+func (p *Pocketbase) PocketbaseInit() (*Pocketbase) {
+	return &Pocketbase{}
+}
+
+func (p * Pocketbase) PocketbaseSetup() {
     app := pocketbase.New()
 
     app.OnServe().BindFunc(func(se *core.ServeEvent) error {
