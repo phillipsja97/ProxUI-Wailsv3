@@ -1,13 +1,12 @@
-import flowbite from "flowbite-react/tailwind";
+import withMT from "@material-tailwind/react/utils/withMT";
 
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: [
-    "./index.html", "./src/**/*.{js,ts,jsx,tsx}",
-    flowbite.content()
-  ],
+
+export default withMT({
+  darkMode: 'class',
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
   },
-  plugins: [flowbite.plugin()],
-};
+  plugins: [],
+});

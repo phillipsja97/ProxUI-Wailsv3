@@ -1,56 +1,57 @@
+//
+
 package main
 
 import (
 	"context"
 	"fmt"
-	"os"
-	"log"
-	// "encoding/json"
-	"github.com/joho/godotenv"
-	"tailscale.com/client/tailscale/v2"
+	"log/slog"
+
+	"tailscale.com/client/tailscale"
+	"tailscale.com/types/key"
+
+	// "tailscale.com/client/tailscale/apitype"
+	// "tailscale.com/cmd/tailscale/cli"
+	// "tailscale.com/ipn"
+	"tailscale.com/ipn/ipnstate"
+	// "tailscale.com/net/netcheck"
+	// "tailscale.com/net/netmon"
+	// "tailscale.com/tailcfg"
+	// "tailscale.com/types/logger"
 )
 
-// TailscaleService manages the Tailscale client
-type TailscaleService struct {}
+type TailscaleClient struct {}
 
-func (s *TailscaleService) GetDevices() (devices []tailscale.Device) {
-	loadErr := godotenv.Load()
-	if loadErr != nil {
-		log.Fatalf("Error loading .env file %s", loadErr)
-	}
+var (
+	localClient tailscale.LocalClient
+)
 
-	client := &tailscale.Client{
-		Tailnet: os.Getenv("TAILNET"),
-		APIKey: os.Getenv("TAILSCALE_APIKEY"),
-	}
-
-	devices, err := client.Devices().ListWithAllFields(context.Background())
-	if err != nil {
-		fmt.Printf("Failed to get devices %s", err)
-	}
-
-	return devices
+func (*TailscaleClient) StartService( logger *slog.Logger) *TailscaleClient {
+	return &TailscaleClient{}
 }
 
-func (s *TailscaleService) GetUsers() (users []tailscale.User) {
-	loadErr := godotenv.Load()
-	if loadErr != nil {
-		log.Fatalf("Error loading .env file %s", loadErr)
-	}
-
-	client := &tailscale.Client{
-		Tailnet: os.Getenv("TAILNET"),
-		APIKey: os.Getenv("TAILSCALE_APIKEY"),
-	}
-
-	// var userType *tailscale.UserType
-	// var userRole *tailscale.UserRole
-
-
-	users, err := client.Users().List(context.Background(), nil, nil)
+func (*TailscaleClient) TailscaleStatus(ctx context.Context) (*ipnstate.Status, error) {
+	status, err := localClient.Status(ctx)
 	if err != nil {
-		fmt.Printf("Failed to get users %s", err)
+		return nil, fmt.Errorf("error connecting to tailscale status %w", err)
 	}
 
-	return users
+	return status, nil
+}
+
+func (*TailscaleClient) GetTailscalePeers(ctx context.Context) ([]*ipnstate.PeerStatus, error) {
+	status, err := localClient.Status(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("error connecting to tailscale status %w", err)
+	}
+
+	return extractPeerStatus(status.Peer), nil
+}
+
+func extractPeerStatus(peerMap map[key.NodePublic]*ipnstate.PeerStatus) []*ipnstate.PeerStatus {
+    var result []*ipnstate.PeerStatus
+    for _, peerStatus := range peerMap {
+        result = append(result, peerStatus)
+    }
+    return result
 }

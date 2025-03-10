@@ -5,19 +5,19 @@
 // @ts-ignore: Unused imports
 import {Create as $Create} from "@wailsio/runtime";
 
-export class Pocketbase {
+export class TailscaleClient {
 
-    /** Creates a new Pocketbase instance. */
-    constructor($$source: Partial<Pocketbase> = {}) {
+    /** Creates a new TailscaleClient instance. */
+    constructor($$source: Partial<TailscaleClient> = {}) {
 
         Object.assign(this, $$source);
     }
 
     /**
-     * Creates a new Pocketbase instance from a string or object.
+     * Creates a new TailscaleClient instance from a string or object.
      */
-    static createFrom($$source: any = {}): Pocketbase {
+    static createFrom($$source: any = {}): TailscaleClient {
         let $$parsedSource = typeof $$source === 'string' ? JSON.parse($$source) : $$source;
-        return new Pocketbase($$parsedSource as Partial<Pocketbase>);
+        return new TailscaleClient($$parsedSource as Partial<TailscaleClient>);
     }
 }
